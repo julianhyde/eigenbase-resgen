@@ -1,0 +1,169 @@
+<?xml version="1.0" ?>
+<?xml-stylesheet type="text/xsl" href="../../../../misc/Meta.xsl" ?>
+<!--
+// Licensed to Julian Hyde under one or more contributor license
+// agreements. See the NOTICE file distributed with this work for
+// additional information regarding copyright ownership.
+//
+// Julian Hyde licenses this file to you under the Apache License,
+// Version 2.0 (the "License"); you may not use this file except in
+// compliance with the License. You may obtain a copy of the License at:
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+  -->
+
+<Model
+name="resource"
+dtdName="Resource.dtd"
+className="ResourceDef"
+packageName="org.eigenbase.resgen"
+root="resourceBundle"
+version="1.0"
+>
+
+<Doc>
+  This model specifies the elements which make up a resource file. See
+  {@link ResourceGenTask} for more information.
+</Doc>
+
+<Element type="resourceBundle">
+    <Doc>
+        A <code>ResourceBundle</code> is a collection of resources.
+        The resource generator generates a class from a resource bundle
+        which has an accessor method for each resource.
+    </Doc>
+    <Attribute name="locale" required="true">
+        <Doc>
+            The locale of resources in this resource bundle,
+            for example, "en_US_Boston", "en_US", or "en".
+        </Doc>
+    </Attribute>
+    <Attribute name="exceptionClassName" required="false">
+        <Doc>
+            Default class for exceptions.
+        </Doc>
+    </Attribute>
+    <Attribute name="cppNamespace" required="false">
+        <Doc>
+            C++ Namespace for generated classes. Base
+            classes are assumed to be in the same namespace.
+        </Doc>
+    </Attribute>
+    <Attribute name="cppCommonInclude" required="false">
+        <Doc>
+            C++ common include file.  Included at the
+            start of all generated C++ class implementations.
+        </Doc>
+    </Attribute>
+    <Attribute name="cppExceptionClassName" required="false">
+        <Doc>
+            Default class for exceptions in generated C++.
+        </Doc>
+    </Attribute>
+    <Attribute name="cppExceptionClassLocation" required="false">
+        <Doc>
+            The location of the C++ header file that contains
+            the definition of the defautl C++ exception class.
+            Required if the default C++ exception class is
+            defined.  This location is also used as the default
+            location for resource-specific exception classes.
+        </Doc>
+    </Attribute>
+    <Array name="resources" type="resource"/>
+    <Object name="code" type="Code">
+        <Doc>
+            Text within this element is included in the generated class.
+        </Doc>
+    </Object>
+</Element>
+
+<Element type="Code">
+    <CData/>
+</Element>
+
+<Element type="resource" abstract="true" keepDef="true">
+    <Attribute name="name" required="true">
+        <Doc>
+            The name of this message or error, unique within this resource
+            bundle.
+        </Doc>
+    </Attribute>
+    <Array name="properties" type="property"/>
+    <Object name="text" type="text"/>
+    <Code>
+        abstract org.eigenbase.xom.DOMWrapper getDef();
+    </Code>
+</Element>
+
+<Element type="message" class="resource" keepDef="true">
+    <Doc>
+        A message.
+    </Doc>
+    <Code>
+        org.eigenbase.xom.DOMWrapper getDef() { return _def; }
+    </Code>
+</Element>
+
+<Element type="text">
+    <CData/>
+</Element>
+
+<Element type="exception" class="resource" keepDef="true">
+    <Doc>
+        An <code>exception</code> defines a message which is issued in response
+        to some invalid condition. It has a type, which must be derived from
+        {@link Throwable}. The generated <code>new<i>ExceptionName</i></code>
+        method creates an instance of this exception with the appropriate
+        parameters.
+    </Doc>
+    <Attribute name="className" required="false">
+        <Doc>
+            The name of the exception class. Must be fully qualified,
+            unless it is in the package <code>java.lang</code>. If not
+            specified, the resource bundle's default exception class is used.
+        </Doc>
+    </Attribute>
+    <Attribute name="cppClassName" required="false">
+        <Doc>
+            The name of the C++ exception class.  If not specified,
+            the resource bundle's default C++ exception class is
+            used.
+        </Doc>
+    </Attribute>
+    <Attribute name="cppClassLocation" required="false">
+        <Doc>
+            The name of the C++ exception class.  If not specified,
+            the resource bundle's default C++ exception location is
+            used.  One of the two must be specfied if the C++
+            exception class is given.
+        </Doc>
+    </Attribute>
+    <Attribute name="cppChainExceptions" required="false">
+        <Doc>
+            Set to true if the C++ exception classes support
+            being chained together.  The default is false.
+            If true, an extra method will be generated for
+            that takes a const pointer to the C++ exception class.
+        </Doc>
+    </Attribute>
+    <Code>
+        org.eigenbase.xom.DOMWrapper getDef() { return _def; }
+    </Code>
+</Element>
+
+<Element type="property">
+    <Attribute name="name" required="true">
+        <Doc>
+            Name of the property.
+        </Doc>
+    </Attribute>
+    <CData/>
+</Element>
+
+</Model>

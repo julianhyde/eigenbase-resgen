@@ -1,0 +1,91 @@
+<!--
+// Licensed to Julian Hyde under one or more contributor license
+// agreements. See the NOTICE file distributed with this work for
+// additional information regarding copyright ownership.
+//
+// Julian Hyde licenses this file to you under the Apache License,
+// Version 2.0 (the "License"); you may not use this file except in
+// compliance with the License. You may obtain a copy of the License at:
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+// Build file for ResGen example.
+  -->
+<project name="Birthday" default="compile">
+
+  <path id="project.classpath">
+    <pathelement location="../lib/eigenbase-xom.jar"/>
+    <pathelement location="../lib/eigenbase-resgen.jar"/>
+    <pathelement location="classes"/>
+  </path>
+
+  <path id="jartest.classpath">
+    <pathelement location="../lib/eigenbase-xom.jar"/>
+    <pathelement location="../lib/eigenbase-resgen.jar"/>
+    <pathelement location="jartest"/>
+  </path>
+
+  <!-- Use -Dcommentstyle=scm-safe to try out alternate comment style. -->
+  <property name="commentstyle" value="normal"/>
+
+  <taskdef name="resgen" classname="org.eigenbase.resgen.ResourceGenTask">
+    <classpath refid="project.classpath"/>
+  </taskdef>
+
+  <target name="generate.resources">
+    <resgen 
+        srcdir="source" 
+        resdir="classes" 
+        locales="en_US,fr_FR"
+        commentstyle="${commentstyle}">
+      <include name="happy/BirthdayResource.xml"/>
+      <include name="happy/BirthdayResource_fr_FR.properties"/>
+    </resgen>
+  </target>
+
+  <target name="compile" depends="generate.resources">
+    <mkdir dir="classes"/>
+    <javac srcdir="source" destdir="classes">
+      <classpath refid="project.classpath"/>
+      <include name="**/*.java"/>
+    </javac>
+    <copy todir="classes">
+      <fileset dir="source" includes="**/*.properties"/>
+    </copy>
+  </target>
+
+  <target name="clean">
+    <delete includeEmptyDirs="true" quiet="true">
+      <fileset dir="classes"/>
+      <fileset dir="jartest"/>
+      <fileset dir="source" includes="
+happy/BirthdayResource.java,
+happy/BirthdayResource_en_US.java,
+happy/BirthdayResource_fr_FR.java,
+happy/BirthdayResource_en_US.properties"/>
+    </delete>
+  </target>
+
+  <target name="test">
+    <java classpathref="project.classpath" classname="Birthday"/>
+    <mkdir dir="jartest"/>
+    <copy todir="jartest">
+      <fileset dir="classes" includes="JarTest.class"/>
+    </copy>
+    <jar jarfile="jartest/test.jar">
+      <fileset dir="classes">
+        <include name="**/*" />
+        <exclude name="JarTest.class" />
+      </fileset>
+    </jar>
+    <java classpathref="jartest.classpath" classname="JarTest" fork="true">
+      <arg value="file:jartest/test.jar"/>
+    </java>
+  </target>
+</project>
