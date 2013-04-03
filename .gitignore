@@ -6,3 +6,4 @@
 *.ear
 
 .idea/workspace.xml
+target
