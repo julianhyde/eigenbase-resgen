@@ -4,7 +4,7 @@
   <!-- The basics. -->
   <groupId>eigenbase</groupId>
   <artifactId>eigenbase-resgen</artifactId>
-  <version>1.3.3</version>
+  <version>1.3.4-SNAPSHOT</version>
   <packaging>bundle</packaging>
 
   <!-- More project information. -->
@@ -124,7 +124,7 @@
     <connection>scm:git:git://github.com/julianhyde/eigenbase-resgen.git</connection>
     <developerConnection>scm:git:git@github.com:julianhyde/eigenbase-resgen.git</developerConnection>
     <url>scm:git:git://github.com/julianhyde/eigenbase-resgen.git</url>
-    <tag>eigenbase-resgen-1.3.3</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <dependencies>
