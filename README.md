@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/julianhyde/eigenbase-resgen.png)](https://travis-ci.org/julianhyde/eigenbase-resgen)
+
 eigenbase-resgen
 ================
 
