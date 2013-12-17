@@ -61,6 +61,8 @@ public abstract class ShadowResourceBundle extends ResourceBundle {
      * reads from <code>foo/MyResource_en_US.properties</code>, then
      * <code>foo/MyResource_en.properties</code>, then
      * <code>foo/MyResource.properties</code>.
+     *
+     * @throws IOException on error
      */
     protected ShadowResourceBundle() throws IOException {
         super();
@@ -163,6 +165,10 @@ public abstract class ShadowResourceBundle extends ResourceBundle {
      *
      * @deprecated This method does not work correctly in dynamically
      * loaded jars.
+     *
+     * @param baseName Base name
+     *
+     * @return Resource bundle
      */
     protected static ResourceBundle instance(String baseName) {
         return instance(baseName, getThreadLocale());
@@ -186,6 +192,10 @@ public abstract class ShadowResourceBundle extends ResourceBundle {
      *    }
      *    ...
      * }</pre></blockquote>
+     *
+     * @param baseName Base name
+     * @param locale Locale
+     * @return Resource bundle
      *
      * @deprecated This method does not work correctly in dynamically
      * loaded jars.
@@ -220,6 +230,11 @@ public abstract class ShadowResourceBundle extends ResourceBundle {
      *    }
      *    ...
      * }</pre></blockquote>
+     *
+     * @param baseName Base name
+     * @param locale Locale
+     * @param bundle Resource bundle
+     * @return Resource bundle
      */
     protected static ShadowResourceBundle instance(
         String baseName, Locale locale, ResourceBundle bundle)
@@ -236,7 +251,9 @@ public abstract class ShadowResourceBundle extends ResourceBundle {
 
     /** Returns the preferred locale of the current thread, or
      * the default locale if the current thread has not called {@link
-     * #setThreadLocale}. */
+     * #setThreadLocale}.
+     *
+     * @return Locale */
     protected static Locale getThreadOrDefaultLocale() {
         Locale locale = getThreadLocale();
         if (locale == null) {
@@ -247,13 +264,17 @@ public abstract class ShadowResourceBundle extends ResourceBundle {
     }
 
     /** Sets the locale for the current thread. Used by {@link
-     * #instance(String,Locale)}. */
+     * #instance(String,Locale)}.
+     *
+     * @param locale Locale */
     public static void setThreadLocale(Locale locale) {
         mapThreadToLocale.set(locale);
     }
 
     /** Returns the preferred locale of the current thread, or null if the
-     * thread has not called {@link #setThreadLocale}. */
+     * thread has not called {@link #setThreadLocale}.
+     *
+     * @return Locale */
     public static Locale getThreadLocale() {
         return (Locale) mapThreadToLocale.get();
     }

@@ -66,7 +66,7 @@ import java.util.ArrayList;
  *
  * <h2>Element &lt;resourceGen&gt;</h2>
  *
- * <table border="2">
+ * <table border="2" summary="resourceGen attributes">
  * <tr>
  * <th>Attribute</th>
  * <th>Description</th>
@@ -181,7 +181,10 @@ public class ResourceGenTask extends Task
         }
     }
 
-    /** Called by ANT. */
+    /** Called by ANT.
+     *
+     * @param resourceArgs Arguments
+     */
     public void addInclude(Include resourceArgs)
     {
         resources.add(resourceArgs);
@@ -214,7 +217,10 @@ public class ResourceGenTask extends Task
         return (Include[]) resources.toArray(new Include[0]);
     }
 
-    /** Sets <a href="#mode">mode</a>. */
+    /** Sets <a href="#mode">mode</a>.
+     *
+     * @param mode Mode
+     */
     public void setMode(String mode)
         throws BuildException
     {
@@ -229,37 +235,49 @@ public class ResourceGenTask extends Task
         }
     }
 
-    /** Sets <a href="#srcdir">srcdir</a>. */
+    /** Sets <a href="#srcdir">srcdir</a>.
+     *
+     * @param srcDir Source directory */
     public void setSrcdir(File srcDir)
     {
         this.src = srcDir;
     }
 
-    /** Returns <a href="#srcdir">srcdir</a>. */
+    /** Returns <a href="#srcdir">srcdir</a>.
+     *
+     * @return Source directory */
     public File getSrcdir()
     {
         return src;
     }
 
-    /** Sets <a href="#destdir">destdir</a>. */
+    /** Sets <a href="#destdir">destdir</a>.
+     *
+     * @param destDir Destination directory */
     public void setDestdir(File destDir)
     {
         this.dest = destDir;
     }
 
-    /** Returns <a href="#destdir">destdir</a>. */
+    /** Returns <a href="#destdir">destdir</a>.
+     *
+     * @return Destination directory */
     public File getDestdir()
     {
         return dest;
     }
 
-    /** Sets <a href="#resdir">resdir</a>. */
+    /** Sets <a href="#resdir">resdir</a>.
+     *
+     * @param resDir Resource directory */
     public void setResdir(File resDir)
     {
         this.res = resDir;
     }
 
-    /** Sets <a href="#style">style</a>. */
+    /** Sets <a href="#style">style</a>.
+     *
+     * @param style Style */
     public void setStyle(String style) throws BuildException
     {
         if (style.equals("dynamic")) {
@@ -271,19 +289,25 @@ public class ResourceGenTask extends Task
         }
     }
 
-    /** Sets <a href="#locales">locales</a>. */
+    /** Sets <a href="#locales">locales</a>.
+     *
+     * @param locales Locales */
     public void setLocales(String locales) throws BuildException
     {
         this.locales = locales;
     }
 
-    /** Sets <a href="#force">force</a>. */
+    /** Sets <a href="#force">force</a>.
+     *
+     * @param force Force */
     public void setForce(boolean force)
     {
         this.force = force;
     }
 
-    /** Sets <a href="#commentstyle">commentstyle</a>. */
+    /** Sets <a href="#commentstyle">commentstyle</a>.
+     *
+     * @param commentStyle Comment style */
     public void setCommentStyle(String commentStyle) throws BuildException
     {
         if (commentStyle.equals("normal")) {
@@ -300,7 +324,7 @@ public class ResourceGenTask extends Task
      * <code>Include</code> implements &lt;include&gt; element nested
      * within a &lt;resgen&gt; task (see {@link ResourceGenTask}).
      *
-     * <table border="2">
+     * <table border="2" summary="include attributes">
      * <tr>
      * <th>Attribute</th>
      * <th>Description</th>
@@ -402,19 +426,25 @@ public class ResourceGenTask extends Task
             }
         }
 
-        /** Sets <a href="#name">name</a>. */
+        /** Sets <a href="#name">name</a>.
+         *
+         * @param name Name */
         public void setName(String name)
         {
             this.fileName = name;
         }
 
-        /** Sets <a href="#className">className</a>. */
+        /** Sets <a href="#className">className</a>.
+         *
+         * @param className Class name */
         public void setClassName(String className)
         {
             this.className = className;
         }
 
-        /** Sets <a href="#baseClassName">baseClassName</a>. */
+        /** Sets <a href="#baseClassName">baseClassName</a>.
+         *
+         * @param baseClassName Base class name */
         public void setBaseClassName(String baseClassName)
         {
             this.baseClassName = baseClassName;
@@ -425,13 +455,17 @@ public class ResourceGenTask extends Task
             return baseClassName;
         }
 
-        /** Sets <a href="#cppClassName">cppClassName</a>. */
+        /** Sets <a href="#cppClassName">cppClassName</a>.
+         *
+         * @param className C++ class name */
         public void setCppClassName(String className)
         {
             this.cppClassName = className;
         }
 
-        /** Sets <a href="#cppBaseClassName">cppBaseClassName</a>. */
+        /** Sets <a href="#cppBaseClassName">cppBaseClassName</a>.
+         *
+         * @param baseClassName Base C++ class name */
         public void setCppBaseClassName(String baseClassName)
         {
             this.cppBaseClassName = baseClassName;

@@ -89,6 +89,8 @@ public class ResourceDefinition
 
     /**
      * Returns this resource definition's key.
+     *
+     * @return Key
      */
     public String getKey()
     {
@@ -99,6 +101,8 @@ public class ResourceDefinition
      * Returns this resource definition's message in the base locale.
      * (To find the message in another locale, you will need to load a
      * resource bundle for that locale.)
+     *
+     * @return Base message
      */
     public String getBaseMessage()
     {
@@ -107,6 +111,8 @@ public class ResourceDefinition
 
     /**
      * Returns the properties of this resource definition.
+     *
+     * @return Properties
      */
     public Properties getProperties()
     {
@@ -121,6 +127,8 @@ public class ResourceDefinition
 
     /**
      * Returns the types of arguments.
+     *
+     * @return Argument types
      */
     public String[] getArgTypes()
     {
@@ -136,6 +144,7 @@ public class ResourceDefinition
      * @param args Arguments to populate the message's parameters.
      *   The arguments must be consistent in number and type with the results
      *   of {@link #getArgTypes}.
+     * @return Resource instance
      */
     public ResourceInstance instantiate(ResourceBundle bundle, Object[] args)
     {

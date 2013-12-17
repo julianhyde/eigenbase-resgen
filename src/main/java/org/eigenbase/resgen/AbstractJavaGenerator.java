@@ -53,6 +53,9 @@ abstract class AbstractJavaGenerator extends AbstractGenerator
     /**
      * Returns the type of error which is to be thrown by this resource.
      * Result is null if this is not an error.
+     *
+     * @param exception Exception element
+     * @return Error class name
      */
     protected String getErrorClass(
             ResourceDef.Exception exception) {

@@ -33,7 +33,7 @@ interface Generator
      * well as comments change with each generation of the file (thereby
      * avoiding merge conflicts).
      * 
-     * @param enabled
+     * @param enabled Whether enabled
      */
     void setScmSafeComments(boolean enabled);
     

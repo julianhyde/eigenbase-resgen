@@ -61,6 +61,9 @@ abstract class AbstractGenerator implements Generator
 
     /**
      * Generates code for a particular resource.
+     *
+     * @param resource Resource
+     * @param pw Writer
      */
     protected abstract void generateResource(
         ResourceDef.Resource resource,
@@ -95,6 +98,8 @@ abstract class AbstractGenerator implements Generator
 
     /**
      * Returns the generator's output file.  e.g., "BirthdayResource.java"
+     *
+     * @return Output file
      */
     protected File getFile()
     {
@@ -105,7 +110,8 @@ abstract class AbstractGenerator implements Generator
      * Returns the XML or .properties source file, in a manner suitable
      * for use in source code comments.  Path information is stripped if
      * SCM-safe comment style is enabled.
-     * 
+     *
+     * @return source file
      * @see #setScmSafeComments(boolean)
      */
     protected String getSrcFileForComment()
@@ -125,16 +131,23 @@ abstract class AbstractGenerator implements Generator
     /**
      * Returns the fully-qualified name of the class being generated,
      * for example "happy.BirthdayResource_en_US".
+     *
+     * @return Name of class
      */
     protected abstract String getClassName();
 
     /**
      * Returns the fully-qualified name of the base class.
+     *
+     * @return Name of base class
      */
     protected abstract String getBaseClassName();
 
     /**
      * Returns a parameter list string, e.g. "String p0, int p1".
+     *
+     * @param message Message to parse
+     * @return Parameter list as a string
      */
     protected String getParameterList(String message) {
         final String [] types = getArgTypes(message);
@@ -165,6 +178,9 @@ abstract class AbstractGenerator implements Generator
      * expressed as an array of Strings (legal values are
      * currently "String", "Number", "java.util.Date", and null) ordered by
      * parameter number.
+     *
+     * @param message Message
+     * @return Array of argument type names
      */
     protected abstract String [] getArgTypes(String message);
 

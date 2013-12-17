@@ -32,7 +32,7 @@ import java.io.IOException;
  *
  * <pre>java org.eigenbase.resgen.ResourceGen MyResource_en.xml</pre>
  *
- * </blockquote></p>
+ * </blockquote>
  *
  * <p>This will create class <code>MyResource</code>, with a
  * function corresponding to each error message in

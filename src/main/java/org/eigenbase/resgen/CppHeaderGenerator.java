@@ -30,11 +30,11 @@ public class CppHeaderGenerator extends CppGenerator
     /**
      * Creates a C++ header generator.
      *
-     * @param srcFile
-     * @param file
-     * @param className
+     * @param srcFile Source file
+     * @param file File
+     * @param className Class name
      * @param baseClassName Name of base class, must not be null, typically
-     * @param defaultExceptionClassName
+     * @param defaultExceptionClassName Default exception class name
      */
     public CppHeaderGenerator(
         File srcFile,

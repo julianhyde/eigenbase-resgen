@@ -37,7 +37,7 @@ public interface Resource {
      * @param url The URL of the XML file containing the error messages
      * @param locale The ISO locale code (e.g. <code>"en"</code>, or
      *    <code>"en_US"</code>, or <code>"en_US_WIN"</code>) of the messages
-     * @throws IOException if <code>url</code> cannot be opened, or if the
+     * @throws java.io.IOException if <code>url</code> cannot be opened, or if the
      *    format of its contents are invalid
      */
     void init(java.net.URL url, Locale locale) throws java.io.IOException;
@@ -53,6 +53,8 @@ public interface Resource {
 
     /**
      * Returns the locale of the messages.
+     *
+     * @return Locale of the messages
      */
     Locale getLocale();
 
@@ -60,13 +62,21 @@ public interface Resource {
      * Formats the message corresponding to <code>code</code> with the given
      * arguments. If an argument is not supplied, the tokens remain in the
      * returned message string.
+     *
+     * @param code Code
+     * @param args Arguments
+     * @return Formatted message
      */
     String formatError(int code, Object[] args);
 
     /**
      * Returns the severity of this message.
+     *
+     * @param code Code
+     * @return Severity of the message
      */
     int getSeverity(int code);
+
     int SEVERITY_INFO = 0;
     int SEVERITY_ERR  = 1;
     int SEVERITY_WARN = 2;
