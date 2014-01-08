@@ -1,9 +1,22 @@
 [![Build Status](https://travis-ci.org/julianhyde/eigenbase-resgen.png)](https://travis-ci.org/julianhyde/eigenbase-resgen)
 
-eigenbase-resgen
-================
+# eigenbase-resgen
 
 Generator of type-safe wrappers for Java resource files.
+
+# Prerequisites
+
+Eigenbase-resgen requires git, maven (3.0.4 or later), and JDK 1.6 or later (JDK 1.7 preferred).
+  
+# Download and build
+
+```bash
+$ git clone git://github.com/julianhyde/eigenbase-resgen.git
+$ cd eigenbase-resgen
+$ mvn install
+```
+
+# Introduction
 
 <p>The Eigenbase Resource Generator (eigenbase-resgen, or ResGen for short)
 helps you build and maintain internationalized applications in Java. From a
@@ -632,7 +645,7 @@ internationalized applications in <a target="_self" href="overview_cpp.html">C++
 <h2>API</h2>
 
 For details on the ResGen interfaces, please see the 
-<a href="api/index.html">javadoc</a>.
+<a href="http://www.hydromatic.net/resgen/apidocs/index.html">javadoc</a>.
 
 <h2>Conclusion</h2>
 <p>ResGen helps you build and maintain an internationalized application. Code
@@ -640,10 +653,12 @@ generation helps to leverage the power of the compiler: it detects parameters
 which are missing or of the wrong type, spelling mistakes, and informational
 messages which are being used to describe error conditions.</p>
 
-<h2>History</h2>
+# More information
 
-<p>ResGen was derived from the
-MonRG utility in the <a href="http://mondrian.pentaho.com">Mondrian project</a> (an open-source OLAP server).
-Next, it was part of the Eigenbase project (hence the name).
-Now it is a standalone library, maintained by Julian Hyde, and hosted at
-<a href="http://github.com/julianhyde/eigenbase-resgen">github</a>.</p>
+* License: Apache License, Version 2.0.
+* Author: Julian Hyde
+* Project page: http://www.hydromatic.net/resgen
+* Source code: http://github.com/julianhyde/eigenbase-resgen
+* Developers list: http://groups.google.com/group/optiq-dev
+* Continuous integration: https://travis-ci.org/julianhyde/eigenbase-resgen
+* <a href="HISTORY.md">Release notes and history</a>
