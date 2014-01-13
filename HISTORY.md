@@ -2,6 +2,10 @@
 
 For a full list of releases, see <a href="https://github.com/julianhyde/eigenbase-resgen/releases">github</a>.
 
+## <a href="https://github.com/julianhyde/eigenbase-resgen/releases/tag/eigenbase-resgen-1.3.6">1.3.6</a> / 2014-01-13
+
+* Upgrade to eigenbase-xom 1.3.4.
+
 ## <a href="https://github.com/julianhyde/eigenbase-resgen/releases/tag/eigenbase-resgen-1.3.5">1.3.5</a> / 2014-01-08
 
 * Add release notes and history.
