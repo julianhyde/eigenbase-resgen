@@ -64,4 +64,3 @@ class PropertiesFileTask extends FileTask
 }
 
 // End PropertiesFileTask.java
-

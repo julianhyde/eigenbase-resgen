@@ -101,7 +101,7 @@ public class JavaFunctorBaseGenerator extends JavaBaseGenerator
     }
 
     private String getFunctorType(
-        String parameterList, 
+        String parameterList,
         String argumentList,
         String errorClassName)
     {
@@ -127,7 +127,8 @@ public class JavaFunctorBaseGenerator extends JavaBaseGenerator
         pw.println("    /**");
         pw.println("     * Definition for resources which");
         if (errorClassName != null) {
-            pw.println("     * return a {@link " + errorClassName + "} exception and");
+            pw.println("     * return a "
+                + "{@link " + errorClassName + "} exception and");
         }
         pw.println("     * take arguments '" + parameterList + "'.");
         pw.println("     */");

@@ -28,7 +28,7 @@ import java.util.Locale;
  *
  * @author jhyde
  */
-abstract class FileTask 
+abstract class FileTask
 {
     ResourceGenTask.Include include;
     String className;
@@ -55,9 +55,9 @@ abstract class FileTask
     String getFileForComments()
     {
         String file = getFile().toString().replace('\\', '/');
-        
-        if (include.root.commentStyle == 
-            	ResourceGenTask.COMMENT_STYLE_SCM_SAFE) {
+
+        if (include.root.commentStyle ==
+                ResourceGenTask.COMMENT_STYLE_SCM_SAFE) {
             int slashPos = file.lastIndexOf('/');
             if (slashPos > 0) {
                 file = "..." + file.substring(slashPos);
@@ -187,13 +187,13 @@ abstract class FileTask
             }
 
             configureCommentStyle(gen);
-            
+
             gen.generateModule(generator, resourceList, pw);
         } finally {
             pw.close();
         }
     }
-    
+
     protected void configureCommentStyle(Generator gen)
     {
         switch(include.root.commentStyle) {
@@ -212,3 +212,5 @@ abstract class FileTask
 
     }
 }
+
+// End FileTask.java

@@ -32,11 +32,11 @@ interface Generator
      * squelches comments indicating the file should not be checked in as
      * well as comments change with each generation of the file (thereby
      * avoiding merge conflicts).
-     * 
+     *
      * @param enabled Whether enabled
      */
     void setScmSafeComments(boolean enabled);
-    
+
     /**
      * Generates a class containing a line for each resource.
      */

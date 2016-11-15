@@ -41,11 +41,11 @@ class CppGenerator extends AbstractGenerator
     /**
      * Creates a C++ header generator.
      *
-     * @param srcFile
-     * @param file
-     * @param className
+     * @param srcFile Source file
+     * @param file File
+     * @param className Class name
      * @param baseClassName Name of base class, must not be null, typically
-     * @param defaultExceptionClassName
+     * @param defaultExceptionClassName Default exception class name
      */
     CppGenerator(
         File srcFile,
@@ -90,11 +90,11 @@ class CppGenerator extends AbstractGenerator
 
         if (resourceList.cppCommonInclude != null) {
             pw.println(
-                "// begin common include specified by " 
+                "// begin common include specified by "
                 + getSrcFileForComment());
             pw.println("#include \"" + resourceList.cppCommonInclude + "\"");
             pw.println(
-                "// end common include specified by " 
+                "// end common include specified by "
                 + getSrcFileForComment());
         }
 

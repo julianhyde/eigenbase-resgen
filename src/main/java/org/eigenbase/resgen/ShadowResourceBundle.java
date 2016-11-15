@@ -126,8 +126,7 @@ public abstract class ShadowResourceBundle extends ResourceBundle {
                         return ClassLoader.getSystemResourceAsStream(resName);
                     }
                 }
-            }
-        );
+            });
     }
 
     public Enumeration getKeys() {
@@ -142,8 +141,9 @@ public abstract class ShadowResourceBundle extends ResourceBundle {
     /**
      * Returns the instance of the <code>baseName</code> resource bundle for
      * the current thread's locale. For example, if called with
-     * "mondrian.olap.MondrianResource", from a thread which has called {@link
-     * #setThreadLocale}({@link Locale#FRENCH}), will get an instance of
+     * "mondrian.olap.MondrianResource", from a thread which has called
+     * {@link #setThreadLocale}({@link Locale#FRENCH}),
+     * will get an instance of
      * "mondrian.olap.MondrianResource_FR" from the cache.
      *
      * <p> This method should be called from a derived class, with the proper
@@ -250,8 +250,8 @@ public abstract class ShadowResourceBundle extends ResourceBundle {
     }
 
     /** Returns the preferred locale of the current thread, or
-     * the default locale if the current thread has not called {@link
-     * #setThreadLocale}.
+     * the default locale if the current thread has not called
+     * {@link #setThreadLocale}.
      *
      * @return Locale */
     protected static Locale getThreadOrDefaultLocale() {
@@ -263,8 +263,8 @@ public abstract class ShadowResourceBundle extends ResourceBundle {
         }
     }
 
-    /** Sets the locale for the current thread. Used by {@link
-     * #instance(String,Locale)}.
+    /** Sets the locale for the current thread.
+     * Used by {@link #instance(String,Locale)}.
      *
      * @param locale Locale */
     public static void setThreadLocale(Locale locale) {

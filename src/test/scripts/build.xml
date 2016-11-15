@@ -39,9 +39,9 @@
   </taskdef>
 
   <target name="generate.resources">
-    <resgen 
-        srcdir="source" 
-        resdir="classes" 
+    <resgen
+        srcdir="source"
+        resdir="classes"
         locales="en_US,fr_FR"
         commentstyle="${commentstyle}">
       <include name="happy/BirthdayResource.xml"/>

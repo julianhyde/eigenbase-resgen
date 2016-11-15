@@ -73,7 +73,7 @@ public class ResourceDefinition
      * @param baseMessage Message for this resource definition in the base
      *    locale.
      * @param props Array of property name/value pairs.
-     *    <code>null</code> means the same as an empty array. 
+     *    <code>null</code> means the same as an empty array.
      */
     public ResourceDefinition(String key, String baseMessage, String[] props)
     {

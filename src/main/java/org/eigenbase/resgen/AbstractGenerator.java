@@ -117,17 +117,16 @@ abstract class AbstractGenerator implements Generator
     protected String getSrcFileForComment()
     {
         String filename = srcFile.toString().replace('\\', '/');
-        
         if (useScmSafeComments()) {
             int slashPos = filename.lastIndexOf('/');
             if (slashPos > 0) {
                 filename = "..." + filename.substring(slashPos);
             }
         }
-        
+
         return filename;
     }
-    
+
     /**
      * Returns the fully-qualified name of the class being generated,
      * for example "happy.BirthdayResource_en_US".

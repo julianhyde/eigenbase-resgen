@@ -37,8 +37,8 @@ public interface Resource {
      * @param url The URL of the XML file containing the error messages
      * @param locale The ISO locale code (e.g. <code>"en"</code>, or
      *    <code>"en_US"</code>, or <code>"en_US_WIN"</code>) of the messages
-     * @throws java.io.IOException if <code>url</code> cannot be opened, or if the
-     *    format of its contents are invalid
+     * @throws java.io.IOException if <code>url</code> cannot be opened, or if
+     *    the format of its contents are invalid
      */
     void init(java.net.URL url, Locale locale) throws java.io.IOException;
 

@@ -43,7 +43,7 @@ public class CppHeaderGenerator extends CppGenerator
         String baseClassName,
         String defaultExceptionClassName)
     {
-        super(srcFile, file, className, baseClassName, 
+        super(srcFile, file, className, baseClassName,
             defaultExceptionClassName, null);
     }
 
@@ -62,9 +62,8 @@ public class CppHeaderGenerator extends CppGenerator
         if (resourceList.cppNamespace != null) {
             ifndef.insert(0, '_');
             ifndef.insert(0, resourceList.cppNamespace.substring(1));
-            ifndef.insert(0, Character.toUpperCase(resourceList
-                                                   .cppNamespace
-                                                   .charAt(0)));
+            ifndef.insert(0,
+                Character.toUpperCase(resourceList.cppNamespace.charAt(0)));
         }
 
         pw.println("#ifndef " + ifndef.toString());

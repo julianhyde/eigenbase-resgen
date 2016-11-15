@@ -44,3 +44,5 @@ public class Birthday {
         wishHappyBirthday("Pierre", 22);
     }
 }
+
+// End Birthday.java

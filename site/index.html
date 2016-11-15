@@ -357,7 +357,7 @@ dynamic</code> and <code>functor</code>.</p>
 
 <h4>Static style</h4>
 
-<p>In the <code>static</code> style, the generated Java resource class contains 
+<p>In the <code>static</code> style, the generated Java resource class contains
 a resource member and several methods for each resource. In the example, the <i>
 TooYoung</i> resource had a data member and three methods:</p>
 <ul>
@@ -377,7 +377,7 @@ TooYoung</i> resource had a data member and three methods:</p>
 
 <h4>Dynamic style</h4>
 
-<p>In the <code>dynamic</code> style, the same data member and methods are 
+<p>In the <code>dynamic</code> style, the same data member and methods are
 generated, but they are not static. For example,</p>
 <ul>
 	<li><code>public final ResourceDefinition TooYoung;</code></li>
@@ -386,14 +386,14 @@ generated, but they are not static. For example,</p>
 	<li><code>public RuntimeException newTooYoung(String, Throwable)</code></li>
 </ul>
 
-<p>Because the methods are not static, they have different behavior if they are 
-invoked on different objects. Typically you have an instance of the resource 
-bundle for each locale. These instances are accessed via the <code>instance()</code> 
+<p>Because the methods are not static, they have different behavior if they are
+invoked on different objects. Typically you have an instance of the resource
+bundle for each locale. These instances are accessed via the <code>instance()</code>
 and <code>instance(Locale)</code> methods in the resource bundle:</p>
 <ul>
-	<li><code>BirthdayResource.instance()</code> returns the instance of the 
+	<li><code>BirthdayResource.instance()</code> returns the instance of the
 	resource bundle for the thread's default locale.</li>
-	<li><code>BirthdayResource.instance(Locale)</code> returns the instance of 
+	<li><code>BirthdayResource.instance(Locale)</code> returns the instance of
 	the resource bundle for the given locale.</li>
 </ul>
 
@@ -419,8 +419,8 @@ public class Birthday {
 
 <h4>Functor style</h4>
 
-<p>In the <code>functor</code> style, only one data member is generated per 
-resource, but the data member belongs to a class which has all of the necessary 
+<p>In the <code>functor</code> style, only one data member is generated per
+resource, but the data member belongs to a class which has all of the necessary
 accessor methods. For example,</p>
 <ul>
 	<li><code>public final _Def0 TooYoung;</code></li>
@@ -432,7 +432,7 @@ accessor methods. For example,</p>
 </ul>
 <p>The accessor methods have the same purpose as the generated methods in <code>
 static</code> or <code>dynamic</code> style, but have different names. The <code>
-str</code> accessor method corresponds to <code>getTooYoung</code>, and <code>ex</code> 
+str</code> accessor method corresponds to <code>getTooYoung</code>, and <code>ex</code>
 corresponds <code>newTooYoung</code>.</p>
 
 <p>Let's see how the code example looks when rewritten to use functors.</p>
@@ -453,17 +453,17 @@ public class Birthday {
 }</pre>
 </blockquote>
 
-<p>The code is slightly more verbose, but functors have two advantages. First, 
-functors are genuine objects, so can be passed as callbacks. Suppose that you 
-are designing a library method which is to create, populate, and throw an 
-exception if it encounters an error, but which cannot be dependent upon a 
-particular resource file. You could design the method to receive a functor, and 
+<p>The code is slightly more verbose, but functors have two advantages. First,
+functors are genuine objects, so can be passed as callbacks. Suppose that you
+are designing a library method which is to create, populate, and throw an
+exception if it encounters an error, but which cannot be dependent upon a
+particular resource file. You could design the method to receive a functor, and
 the method could call the functor's <code>ex()</code> method if it has an error.</p>
 
-<p>Second, they make it easy to figure out which pieces of code are using a 
-particular resource, because there is only one access point to that resource. 
-For example, every piece of code which uses the <i>TooYoung</i> resource must do 
-so via the <code>BirthdayResource.TooYoung</code> data member. If no code is 
+<p>Second, they make it easy to figure out which pieces of code are using a
+particular resource, because there is only one access point to that resource.
+For example, every piece of code which uses the <i>TooYoung</i> resource must do
+so via the <code>BirthdayResource.TooYoung</code> data member. If no code is
 using the data member, you can safely obsolete the resource.</p>
 
 <h2>C++ Resource Support</h2>
@@ -482,7 +482,7 @@ internationalized applications in <a target="_self" href="overview_cpp.html">C++
   <tr>
     <td><code>&lt;resourceBundle&gt;</code></td>
     <td><p>The top-level element.</p>
-    
+
 	<p>Attributes:</p>
 
 	<blockquote>
@@ -497,9 +497,9 @@ internationalized applications in <a target="_self" href="overview_cpp.html">C++
 			</tr>
 			<tr>
 				<td><b><code>style</code></b></td>
-				<td>If <code>dynamic</code> (the default), 
+				<td>If <code>dynamic</code> (the default),
 		generate several accessor methods per resource;
-      if <code>functor</code>, generate one member per resource, with several 
+      if <code>functor</code>, generate one member per resource, with several
 		methods. </td>
 			</tr>
 			<tr>
@@ -546,7 +546,7 @@ internationalized applications in <a target="_self" href="overview_cpp.html">C++
   <tr>
     <td><code>&lt;message&gt;</code></td>
     <td><p>Defines a localizable message.</p>
-    
+
 	<p>Attributes:</p>
 
 	<blockquote>
@@ -565,7 +565,7 @@ internationalized applications in <a target="_self" href="overview_cpp.html">C++
 	</blockquote>
     <p>Children:</p>
     <ul>
-      <li>Zero or more <code>&lt;property&gt;</code> elements, defining properties of 
+      <li>Zero or more <code>&lt;property&gt;</code> elements, defining properties of
 		the resource. These properties will be accessible at runtime via the
 		<a href="api/org/eigenbase/resgen/ResourceDefinition.html#getProperties()">
 		ResourceDefinition.getProperties()</a> method.</li>
@@ -591,7 +591,7 @@ internationalized applications in <a target="_self" href="overview_cpp.html">C++
 			</tr>
 			<tr>
 				<td><b><code>className</code></b></td>
-				<td>The type of exception to generate. Must be fully qualified, 
+				<td>The type of exception to generate. Must be fully qualified,
 				unless it is in the package <code>java.lang</code>. If not<br>
       specified, the resource bundle's default exception class is used.</td>
 			</tr>
@@ -660,7 +660,7 @@ internationalized applications in <a target="_self" href="overview_cpp.html">C++
 
 <h2>API</h2>
 
-For details on the ResGen interfaces, please see the 
+For details on the ResGen interfaces, please see the
 <a href="api/index.html">javadoc</a>.
 
 <h2>Conclusion</h2>

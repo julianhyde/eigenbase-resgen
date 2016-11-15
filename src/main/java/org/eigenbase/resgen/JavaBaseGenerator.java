@@ -61,7 +61,8 @@ class JavaBaseGenerator extends AbstractJavaGenerator
         pw.println("    }");
         pw.println("    private static final String baseName = " + Util.quoteForJava(getClassName()) + ";");
         pw.println("    /**");
-        pw.println("     * Retrieves the singleton instance of {@link " + classNameSansPackage + "}. If");
+        pw.println("     * Retrieves the singleton instance of "
+            + "{@link " + classNameSansPackage + "}. If");
         pw.println("     * the application has called {@link #setThreadLocale}, returns the");
         pw.println("     * resource for the thread's locale.");
         pw.println("     */");
@@ -69,7 +70,8 @@ class JavaBaseGenerator extends AbstractJavaGenerator
         pw.println("        return (" + classNameSansPackage + ") instance(baseName, getThreadOrDefaultLocale(), ResourceBundle.getBundle(baseName, getThreadOrDefaultLocale()));");
         pw.println("    }");
         pw.println("    /**");
-        pw.println("     * Retrieves the instance of {@link " + classNameSansPackage + "} for the given locale.");
+        pw.println("     * Retrieves the instance of "
+            + "{@link " + classNameSansPackage + "} for the given locale.");
         pw.println("     */");
         pw.println("    public static synchronized " + classNameSansPackage + " instance(Locale locale) {");
         pw.println("        return (" + classNameSansPackage + ") instance(baseName, locale, ResourceBundle.getBundle(baseName, locale));");
