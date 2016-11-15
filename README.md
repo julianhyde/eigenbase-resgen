@@ -6,7 +6,7 @@ Generator of type-safe wrappers for Java resource files.
 
 # Prerequisites
 
-Eigenbase-resgen requires git, maven (3.0.4 or later), and JDK 1.6 or later (JDK 1.7 preferred).
+Eigenbase-resgen requires git, maven (3.2.1 or later), and JDK 1.6 or later (JDK 1.8 preferred).
 
 # Download and build
 

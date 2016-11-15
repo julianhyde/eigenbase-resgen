@@ -141,28 +141,28 @@ public class JavaFunctorBaseGenerator extends JavaBaseGenerator
         pw.println("        }");
         if (errorClassName != null) {
             final ExceptionDescription ed = new ExceptionDescription(errorClassName);
-            if (ed.hasInstCon) {
+            if (ed.hasInstCon()) {
                 pw.println("        public " + errorClassName + " ex(" + parameterList + ") {");
                 pw.println("            return new " + errorClassName + "(instantiate(" + addLists(bundleThis, argumentArray) + "));");
                 pw.println("        }");
-            } else if (ed.hasInstThrowCon) {
+            } else if (ed.hasInstThrowCon()) {
                 pw.println("        public " + errorClassName + " ex(" + parameterList + ") {");
                 pw.println("            return new " + errorClassName + "(instantiate(" + addLists(bundleThis, argumentArray) + "), null);");
                 pw.println("        }");
-            } else if (ed.hasStringCon) {
+            } else if (ed.hasStringCon()) {
                 pw.println("        public " + errorClassName + " ex(" + parameterList + ") {");
                 pw.println("            return new " + errorClassName + "(instantiate(" + addLists(bundleThis, argumentArray) + ").toString());");
                 pw.println("        }");
-            } else if (ed.hasStringThrowCon) {
+            } else if (ed.hasStringThrowCon()) {
                 pw.println("        public " + errorClassName + " ex(" + parameterList + ") {");
                 pw.println("            return new " + errorClassName + "(instantiate(" + addLists(bundleThis, argumentArray) + ").toString(), null);");
                 pw.println("        }");
             }
-            if (ed.hasInstThrowCon) {
+            if (ed.hasInstThrowCon()) {
                 pw.println("        public " + errorClassName + " ex(" + addLists(parameterList, "Throwable err") + ") {");
                 pw.println("            return new " + errorClassName + "(instantiate(" + addLists(bundleThis, argumentArray) + "), err);");
                 pw.println("        }");
-            } else if (ed.hasStringThrowCon) {
+            } else if (ed.hasStringThrowCon()) {
                 pw.println("        public " + errorClassName + " ex(" + addLists(parameterList, "Throwable err") + ") {");
                 pw.println("            return new " + errorClassName + "(instantiate(" + addLists(bundleThis, argumentArray) + ").toString(), err);");
                 pw.println("        }");

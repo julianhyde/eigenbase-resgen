@@ -75,6 +75,7 @@ version="1.0"
             location for resource-specific exception classes.
         </Doc>
     </Attribute>
+    <Array name="factories" type="factory"/>
     <Array name="resources" type="resource"/>
     <Object name="code" type="Code">
         <Doc>
@@ -164,6 +165,11 @@ version="1.0"
         </Doc>
     </Attribute>
     <CData/>
+</Element>
+
+<Element type="factory">
+    <Attribute name="className" required="true"/>
+    <Attribute name="signature" required="true"/>
 </Element>
 
 </Model>

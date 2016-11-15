@@ -22,7 +22,9 @@ import org.apache.tools.ant.BuildException;
 import java.io.PrintWriter;
 import java.io.File;
 import java.lang.reflect.Constructor;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -32,7 +34,7 @@ import java.util.Set;
  */
 class JavaBaseGenerator extends AbstractJavaGenerator
 {
-    protected final Set warnedClasses = new HashSet();
+    protected final Set<String> warnedClasses = new HashSet<String>();
 
     JavaBaseGenerator(
         File srcFile,
@@ -123,28 +125,28 @@ class JavaBaseGenerator extends AbstractJavaGenerator
             ResourceDef.Exception exception = (ResourceDef.Exception) resource;
             String errorClassName = getErrorClass(exception);
             final ExceptionDescription ed = new ExceptionDescription(errorClassName);
-            if (ed.hasInstCon) {
+            if (ed.hasInstCon()) {
                 pw.println("    public " + errorClassName + " new" + resourceInitcap + "(" + parameterList + ") {");
                 pw.println("        return new " + errorClassName + "(" + resourceInitcap + ".instantiate(" + addLists("this", argumentArray) + "));");
                 pw.println("    }");
-            } else if (ed.hasInstThrowCon) {
+            } else if (ed.hasInstThrowCon()) {
                 pw.println("    public " + errorClassName + " new" + resourceInitcap + "(" + parameterList + ") {");
                 pw.println("        return new " + errorClassName + "(" + resourceInitcap + ".instantiate(" + addLists("this", argumentArray) + "), null);");
                 pw.println("    }");
-            } else if (ed.hasStringCon) {
+            } else if (ed.hasStringCon()) {
                 pw.println("    public " + errorClassName + " new" + resourceInitcap + "(" + parameterList + ") {");
                 pw.println("        return new " + errorClassName + "(get" + resourceInitcap + "(" + argumentList + "));");
                 pw.println("    }");
-            } else if (ed.hasStringThrowCon) {
+            } else if (ed.hasStringThrowCon()) {
                 pw.println("    public " + errorClassName + " new" + resourceInitcap + "(" + parameterList + ") {");
                 pw.println("        return new " + errorClassName + "(get" + resourceInitcap + "(" + argumentList + "), null);");
                 pw.println("    }");
             }
-            if (ed.hasInstThrowCon) {
+            if (ed.hasInstThrowCon()) {
                 pw.println("    public " + errorClassName + " new" + resourceInitcap + "(" + addLists(parameterList, "Throwable err") + ") {");
                 pw.println("        return new " + errorClassName + "(" + resourceInitcap + ".instantiate(" + addLists("this", argumentArray) + "), err);");
                 pw.println("    }");
-            } else if (ed.hasStringThrowCon) {
+            } else if (ed.hasStringThrowCon()) {
                 pw.println("    public " + errorClassName + " new" + resourceInitcap + "(" + addLists(parameterList, "Throwable err") + ") {");
                 pw.println("        return new " + errorClassName + "(get" + resourceInitcap + "(" + argumentList + "), err);");
                 pw.println("    }");
@@ -156,10 +158,31 @@ class JavaBaseGenerator extends AbstractJavaGenerator
      * Description of the constructs that an exception class has.
      */
     class ExceptionDescription {
+        final List<String> signatures = new ArrayList<String>();
         boolean hasInstCon;
         boolean hasInstThrowCon;
         boolean hasStringCon;
         boolean hasStringThrowCon;
+
+        boolean hasInstCon() {
+            return hasInstCon
+                || signatures.contains("(ResourceInstance r)");
+        }
+
+        boolean hasInstThrowCon() {
+            return hasInstThrowCon
+                || signatures.contains("(ResourceInstance r, Throwable cause)");
+        }
+
+        boolean hasStringCon() {
+            return hasStringCon
+                || signatures.contains("(String message)");
+        }
+
+        boolean hasStringThrowCon() {
+            return hasStringThrowCon
+                || signatures.contains("(String message, Throwable cause)");
+        }
 
         /**
          * Figures out what constructors the exception class has. We'd
@@ -218,6 +241,11 @@ class JavaBaseGenerator extends AbstractJavaGenerator
                     System.out.println("Warning: Could not find exception " +
                         "class '" + errorClassName + "' on classpath. " +
                         "Exception factory methods will not be generated.");
+                }
+                for (ResourceDef.Factory factory : resourceBundle.factories) {
+                    if (factory.className.equals(errorClassName)) {
+                        signatures.add(factory.signature);
+                    }
                 }
             }
         }

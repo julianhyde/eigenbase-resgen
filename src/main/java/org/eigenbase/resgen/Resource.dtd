@@ -12,7 +12,7 @@
      The resource generator generates a class from a resource bundle
      which has an accessor method for each resource.
   -->
-<!ELEMENT resourceBundle ((resource)*,Code?)>
+<!ELEMENT resourceBundle ((factory)*,(resource)*,Code?)>
 <!ATTLIST resourceBundle
 locale CDATA #REQUIRED
 exceptionClassName CDATA #IMPLIED
@@ -58,5 +58,11 @@ name CDATA #REQUIRED
 <!ELEMENT property (#PCDATA)>
 <!ATTLIST property
 name CDATA #REQUIRED
+>
+
+<!ELEMENT factory EMPTY>
+<!ATTLIST factory
+className CDATA #REQUIRED
+signature CDATA #REQUIRED
 >
 
