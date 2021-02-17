@@ -653,6 +653,47 @@ generation helps to leverage the power of the compiler: it detects parameters
 which are missing or of the wrong type, spelling mistakes, and informational
 messages which are being used to describe error conditions.</p>
 
+# Use maven artifacts
+
+Include the following in your `pom.xml`.
+
+```xml
+  <repositories>
+    <repository>
+      <releases>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+        <checksumPolicy>warn</checksumPolicy>
+      </releases>
+      <id>conjars</id>
+      <name>Conjars</name>
+      <url>http://conjars.org/repo</url>
+      <layout>default</layout>
+    </repository>
+  </repositories>
+
+  <dependencies>
+    <dependency>
+      <groupId>eigenbase</groupId>
+      <artifactId>eigenbase-resgen</artifactId>
+      <version>1.3.6</version>
+    </dependency>
+  </dependencies>
+```
+
+# Release (for committers only)
+
+Update version numbers in `README.md`, copyright date in `NOTICE`, and
+add release notes to `HISTORY.md`.
+
+Use JDK 8.
+
+```bash
+$ git clean -nx
+$ mvn release:clean release:prepare
+$ mvn release:perform
+```
+
 # More information
 
 * License: Apache License, Version 2.0.
