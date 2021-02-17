@@ -6,7 +6,7 @@ Generator of type-safe wrappers for Java resource files.
 
 # Prerequisites
 
-Eigenbase-resgen requires git, maven (3.2.1 or later), and JDK 1.6 or later (JDK 1.8 preferred).
+Eigenbase-resgen requires git, maven (3.2.1 or later), and JDK 1.6 or later (JDK 8 preferred).
 
 # Download and build
 
@@ -21,7 +21,7 @@ $ mvn install
 <p>The Eigenbase Resource Generator (eigenbase-resgen, or ResGen for short)
 helps you build and maintain internationalized applications in Java. From a
 simple XML file, it generates classes to access those resources in a type-safe
-manner. It is tightly integrated with <a href="http://jakarta.apache.org/ant/">
+manner. It is tightly integrated with <a href="https://ant.apache.org/">
 ANT</a>, to make the development process painless; and it supports a variety of
 schemes to determine the current locale.</p>
 <p>Let's take a look at a simple example.</p>
@@ -76,7 +76,7 @@ files, you don't need the &quot;<code>compile</code>&quot; target; just add its 
 target.</p>
 <h3>Compile</h3>
 <p>Build as follows. (You need 'ant' on your path, and you will need to edit the
-project.classpath property in <code>build.xml</code>. You also need <code>eigenbase-xom.jar</code>, available from <a href="http://github.com/julianhyde/eigenbase-xom">github</a>.)</p>
+project.classpath property in <code>build.xml</code>. You also need <code>eigenbase-xom.jar</code>, available from <a href="https://github.com/julianhyde/eigenbase-xom">github</a>.)</p>
 <blockquote>
   <pre>$ ant
 Buildfile: build.xml
@@ -611,7 +611,7 @@ internationalized applications in <a target="_self" href="overview_cpp.html">C++
   <tr>
     <td><code>&lt;text&gt;</code></td>
     <td>The text of the message or exception. Should be in Java message format (see
-    <a href="http://java.sun.com/j2se/1.4/docs/api/java/text/MessageFormat.html">
+    <a href="https://docs.oracle.com/javase/8/docs/api/java/text/MessageFormat.html">
     class java.text.MessageFormat</a> for more details).<p>If the message contains
     XML special characters such as '&lt;' and '&amp;', you may find it easier to
     enclose the message in <code>&lt;![CDATA[</code> ... <code>]]&gt;</code>.</td>
@@ -658,23 +658,9 @@ messages which are being used to describe error conditions.</p>
 Include the following in your `pom.xml`.
 
 ```xml
-  <repositories>
-    <repository>
-      <releases>
-        <enabled>true</enabled>
-        <updatePolicy>always</updatePolicy>
-        <checksumPolicy>warn</checksumPolicy>
-      </releases>
-      <id>conjars</id>
-      <name>Conjars</name>
-      <url>http://conjars.org/repo</url>
-      <layout>default</layout>
-    </repository>
-  </repositories>
-
   <dependencies>
     <dependency>
-      <groupId>eigenbase</groupId>
+      <groupId>net.hydromatic</groupId>
       <artifactId>eigenbase-resgen</artifactId>
       <version>1.3.6</version>
     </dependency>
@@ -690,16 +676,21 @@ Use JDK 8.
 
 ```bash
 $ git clean -nx
-$ mvn release:clean release:prepare
-$ mvn release:perform
+$ mvn clean
+$ mvn release:clean
+$ mvn -Prelease release:prepare
+$ mvn -Prelease release:perform
 ```
 
 # More information
 
-* License: Apache License, Version 2.0.
+* License: Apache License, Version 2.0
 * Author: Julian Hyde
 * Project page: http://www.hydromatic.net/resgen
-* Source code: http://github.com/julianhyde/eigenbase-resgen
-* Developers list: http://groups.google.com/group/optiq-dev
+* Source code: https://github.com/julianhyde/eigenbase-resgen
+* Developers list:
+  <a href="mailto:dev@calcite.apache.org">dev at calcite.apache.org</a>
+  (<a href="https://mail-archives.apache.org/mod_mbox/calcite-dev/">archive</a>,
+  <a href="mailto:dev-subscribe@calcite.apache.org">subscribe</a>)
 * Continuous integration: https://travis-ci.org/julianhyde/eigenbase-resgen
 * <a href="HISTORY.md">Release notes and history</a>
