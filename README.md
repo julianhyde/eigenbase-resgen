@@ -26,12 +26,18 @@ simple XML file, it generates classes to access those resources in a type-safe
 manner. It is tightly integrated with <a href="https://ant.apache.org/">
 ANT</a>, to make the development process painless; and it supports a variety of
 schemes to determine the current locale.</p>
+
 <p>Let's take a look at a simple example.</p>
+
 <h2>Example</h2>
+
 <p>The following example shows how you would define a simple resource file, generate
 resource classes from it, and use those classes in your own code.</p>
+
 <h3>Create a resource file</h3>
+
 <p>First, create a resource file like the following, <code>BirthdayResource_en_US.xml</code>:</p>
+
 <blockquote>
   <pre>&lt;?xml version=&quot;1.0&quot; ?&gt;
 &lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;Resource.xsl&quot; ?&gt;
@@ -44,12 +50,15 @@ resource classes from it, and use those classes in your own code.</p>
   &lt;/exception&gt;
 &lt;/resourceBundle&gt;</pre>
 </blockquote>
+
 <p dir="ltr">The top-level element of a resource file is always a <code>&lt;resourceBundle&gt;</code>, and the only necessary property
 is the <code>locale</code> of the current file. Its children are a mixture of
 <code>&lt;message&gt;</code> and <code>&lt;exception&gt;</code> elements. Each must have a
 <code>name</code> attribute and a <code>&lt;text&gt;</code> child holding the message
 string.</p>
+
 <h3>Create ANT target</h3>
+
 <p>Now modify your ANT build-file, <code>build.xml</code>, as follows:</p>
 <blockquote>
   <pre>&lt;taskdef name=&quot;resgen&quot; classname=&quot;org.eigenbase.resgen.ResourceGenTask&quot;&gt;
@@ -71,14 +80,18 @@ string.</p>
   &lt;/copy&gt;
 &lt;/target&gt;</pre>
 </blockquote>
+
 <p>I have assumed that your Java source files are held in the &quot;<code>source</code>&quot;
 directory, and classes are compiled to <code>classes</code> directory, but this
 ought to be easy to change. If you already have a target to compile Java source
 files, you don't need the &quot;<code>compile</code>&quot; target; just add its contents to your own
 target.</p>
+
 <h3>Compile</h3>
+
 <p>Build as follows. (You need 'ant' on your path, and you will need to edit the
 project.classpath property in <code>build.xml</code>. You also need <code>eigenbase-xom.jar</code>, available from <a href="https://github.com/julianhyde/eigenbase-xom">github</a>.)</p>
+
 <blockquote>
   <pre>$ ant
 Buildfile: build.xml
@@ -96,8 +109,11 @@ BUILD SUCCESSFUL
 
 Total time: 3 seconds</pre>
 </blockquote>
+
 <p>Four files are generated.</p>
+
 <p><code>source/happy/BirthdayResource.java</code>:</p>
+
 <blockquote>
   <pre>package happy;
 
@@ -145,7 +161,9 @@ class BirthdayResource extends ShadowResourceBundle {
     }
 }</pre>
 </blockquote>
+
 <p><code>source/happy/BirthdayResource_en_US.java</code>:</p>
+
 <blockquote>
   <pre>package happy;
 import java.io.IOException;
@@ -154,28 +172,36 @@ public class BirthdayResource_en_US extends BirthdayResource {
     public BirthdayResource_en_US() throws IOException {}
 }</pre>
 </blockquote>
+
 <p><code>source/happy/BirthdayResource.properties</code>:</p>
+
 <blockquote>
   <pre>HappyBirthday=Happy Birthday, {0}! You don''t look {1,number}.
 TooYoung={0} has not been born yet.</pre>
 </blockquote>
+
 <p><code>source/happy/BirthdayResource_en_US.properties</code>:</p>
+
 <blockquote>
   <pre># This file is intentionally blank. Add property values
 # to this file to override the translations in the base
 # properties file, BirthdayResource.properties.</pre>
 </blockquote>
+
 <p>For each resource, a <code>get</code><code><i>Xxx</i>()</code> method is
 generated to retrieve that resource in the current locale, substituting
 parameters appropriately. For exception resources, an additional two <code>new<i>Xxx</i>()</code>
 methods are generated to create (but not throw) an exception.</p>
+
 <p>Tokens such as <code>{0}</code> and <code>{1,number}</code> in the message
 are automatically converted to method parameters of the right type. This means
 that if you ever change the parameters in your error message, or accidentally
 delete it, you code will no longer build. (If your code doesn't compile, you can
 fix the problem immediately; better that than getting a phone call, &quot;I just got
 this really weird error...&quot;, in a few months time.)</p>
+
 <p>Here's how you might use it in your code:</p>
+
 <blockquote>
   <pre>import happy.BirthdayResource;
 
@@ -192,23 +218,30 @@ public class Birthday {
     }
 }</pre>
 </blockquote>
+
 <p>This produces the following output.</p>
+
 <blockquote>
     <pre>Happy Birthday, Fred! You don't look 33.
 RuntimeException: Wilma has not been born yet.</pre>
 </blockquote>
+
 <p>So there are the basics. That was easy, wasn't it? Now let's look at how you can
 tell the system to switch to another locale, and how you go about producing
 resource files for that locale.</p>
+
 <h2>Of locales and threads</h2>
+
 <p>When you ask for a message, the system needs to know the locale in order to
 get the right translation. There are several strategies for this.</p>
 <p>The simplest strategy is to do nothing. Most applications run in the same locale as their
 host machine, and so when the system calls <code>Locale.getDefault()</code>, it
 will return the right answer.</p>
+
 <p>You can switch locale by calling <code>Locale.getDefault(Locale newLocale)</code>,
 but this call will affect other applications running in the same Java Virtual
 Machine, and is not allowed in some application server environments.</p>
+
 <p>ResGen provides a method
 <code>ShadowResourceBundle.setThreadLocale(Locale)</code> to allow threads
 to have different locales. Threads which are working in a different locale
@@ -218,23 +251,30 @@ should call this method at their entry point. For example:</p>
 ShadowResourceBundle.setThreadLocale(Locale.FR);
 System.out.println(BirthdayResource.getHappyBirthday(&quot;Pierre&quot;, 22));</pre>
 </blockquote>
+
 <p>produces the output</p>
+
 <blockquote>
     <pre>Happy Birthday, Fred! You don't look 33.
 Bon anniversaire, Pi&egrave;rre! 22, quel bon &acirc;ge.</pre>
 </blockquote>
+
 <p>Threads which have not made this call will remain in the default locale.</p>
+
 <p>This strategy may not be possible if the threading model is complex. Here,
 you should use an explicit resource bundle object:</p>
+
 <blockquote>
   <pre>BirthdayResource myResource = BirthdayResource.instance();
 System.out.println(myResource.getHappyBirthday(&quot;Fred&quot;, 33));
 myResource = BirthdayResource.instance(Locale.FR);
 System.out.println(myResource.getHappyBirthday(&quot;Pierre&quot;, 22));</pre>
 </blockquote>
+
 <p>The problem is that the accessor methods (<code>getHappyBirthday</code>, and so forth) are
 static. To make them non-static, change add <code>static=&quot;false&quot;</code> to the
 <code>&lt;resgen&gt;</code> ANT task:</p>
+
 <blockquote>
   <pre>&lt;target name=&quot;generate.resources&quot;&gt;
   &lt;resgen srcdir=&quot;source&quot; <font color="#FF0000"><i><b>style=&quot;dynamic&quot;</b></i></font>&gt;
@@ -242,23 +282,29 @@ static. To make them non-static, change add <code>static=&quot;false&quot;</code
   &lt;/resgen&gt;
 &lt;/target&gt;</pre>
 </blockquote>
+
 <h2>Translation</h2>
+
 <p>So far, we've just been dealing with one resource file, and you're probably
 wondering why you went to all the trouble of extracting your messages and
 exception strings! Have no fear, there will be more. A typical development
 process goes as follows.</p>
+
 <p>First, you develop your application for a single locale, referred to as the
 <dfn>base locale</dfn>. I have been assuming that
 this American English (<code>en_US</code>), but you can develop in any locale
 you choose.</p>
+
 <p>You create an XML file for this language containing all the messages and
 exceptions used by your application. Developers are often tempted to put in
 hard-coded strings, but ResGen's tight integration with ANT makes it painless to
 modify the XML file and re-generate the wrapper as you go.</p>
+
 <p>So now you have an application in the beta stage. You're written most of the
 code, are getting through the pile of bugs, and would like to translate the
 product into French (<code>fr_FR</code>). Recall that in the above example, we
 were dealing with the following set of files.</p>
+
 <blockquote>
   <table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse" bordercolor="#111111" id="AutoNumber1">
     <tr>
@@ -281,7 +327,9 @@ were dealing with the following set of files.</p>
     </tr>
   </table>
 </blockquote>
+
 <p>Do the following steps:</p>
+
 <ol>
   <li>Copy <code>happy/BirthdayResource.properties</code>&nbsp; to <code>happy/BirthdayResource_fr_FR.properties</code>,
   and translate the messages as appropriate for the new locale:<blockquote>
@@ -299,10 +347,12 @@ TooYoung={0} n'est pas encore n&eacute;(e).</pre>
     </blockquote></li>
    <li>Build.</li>
 </ol>
+
 <p>ResGen treats <code>happy/BirthdayResource_fr_FR.properties</code> as a source file.
 It generates <code>happy/BirthdayResource_fr_FR.java</code> from it, and validates that
 every resource in <code>happy/BirthdayResource_fr_FR.properties</code> exists in
 <code>happy/BirthdayResource_en_US.xml</code>, and has the same number and types of parameters.</p>
+
 <p>In this multi-language scenario, the source and generated files are as
 follows (new files are shown in <i>italic</i>):</p><blockquote>
 
@@ -336,6 +386,7 @@ follows (new files are shown in <i>italic</i>):</p><blockquote>
 messages, it should also have a mode which reminds us to add new messages.)</p>
 
 <a name="cpp_resources"></a>
+
 <h2>Styles of generated code</h2>
 
 <p>ResGen can generate Java code in three styles: <code>static</code>, <code>
@@ -416,6 +467,7 @@ accessor methods. For example,</p>
 &nbsp;&nbsp;&nbsp; public RuntimeException newTooYoung(String, Throwable);<br>
 	}</code></li>
 </ul>
+
 <p>The accessor methods have the same purpose as the generated methods in <code>
 static</code> or <code>dynamic</code> style, but have different names. The <code>
 str</code> accessor method corresponds to <code>getTooYoung</code>, and <code>ex</code>
@@ -650,6 +702,7 @@ For details on the ResGen interfaces, please see the
 <a href="http://www.hydromatic.net/resgen/apidocs/index.html">javadoc</a>.
 
 <h2>Conclusion</h2>
+
 <p>ResGen helps you build and maintain an internationalized application. Code
 generation helps to leverage the power of the compiler: it detects parameters
 which are missing or of the wrong type, spelling mistakes, and informational
@@ -664,7 +717,7 @@ Include the following in your `pom.xml`.
     <dependency>
       <groupId>net.hydromatic</groupId>
       <artifactId>eigenbase-resgen</artifactId>
-      <version>1.3.6</version>
+      <version>1.3.7</version>
     </dependency>
   </dependencies>
 ```
